@@ -21,69 +21,96 @@ GHunt is an offensive Google framework designed for efficient evolution. While p
 
 ## ⚙️ Installation
 
-### **Using pipx (Recommended)**
+### 💁‍♂️ GHunt Setup Instructions 🕵️‍♂️
 
-```bash
-pip3 install pipx
-pipx ensurepath
-pipx install ghunt
+GHunt is a powerful tool for investigating Google accounts. Follow these steps to set it up.
+
+---
+
+## 📌 Table of Contents
+- [📂 Clone the Repository](#-clone-the-repository)
+- [🌍 Create a Virtual Environment](#-create-a-virtual-environment)
+- [📦 Install Dependencies](#-install-dependencies)
+- [🔑 Login to GHunt](#-login-to-ghunt)
+- [🚀 Run GHunt](#-run-ghunt)
+  - [🔍 Using Email Lookup](#-using-email-lookup)
+  - [🔍 Using Gaia ID Lookup](#-using-gaia-id-lookup)
+  - [🛠 Available Modules](#-available-modules)
+- [📝 Notes](#-notes)
+
+---
+
+## 📂 Clone the Repository
+
+Clone the repository and navigate into the directory.
+
+```sh
+git clone https://github.com/v1shwajeet/Ghunt.git
+cd Ghunt
 ```
 
-This approach utilizes virtual environments to prevent dependency conflicts with other projects.
+## 🌍 Create a Virtual Environment
 
-### **Alternative Installation Using pip**
+Set up a virtual environment to isolate dependencies.
 
-If you prefer to use pip directly or plan to integrate GHunt as a library in your projects:
-
-```bash
-pip3 install ghunt
+**On macOS/Linux:**
+```sh
+python3 -m venv venv
+source venv/bin/activate
 ```
 
-This method installs GHunt system-wide or within your active virtual environment.
-
-## 💃 Usage
-
-### **1. Authentication**
-
-Before using GHunt's modules, authenticate your session:
-
-#### **Start the Login Listener:**
-
-```bash
-ghunt login
+**On Windows:**
+```sh
+python3 -m venv venv
+venv\Scripts\activate
 ```
 
-You'll be presented with the following options:
+## 📦 Install Dependencies
 
+Install the required dependencies using pip.
+
+```sh
+pip3 install pillow
+pip3 install -r requirements.txt
 ```
-[1] (Companion) Put GHunt on listening mode
-[2] (Companion) Paste base64-encoded cookies
-[3] Enter manually all cookies
 
-Choice =>
+## 🔑 Login to GHunt
+
+Authenticate with GHunt before running queries.
+
+```sh
+python3 main.py login
 ```
 
-#### **Use GHunt Companion Extension:**
-- **[Firefox Users](https://addons.mozilla.org/en-US/firefox/addon/ghunt-companion/)**
-- **[Chrome Users](https://chrome.google.com/webstore/detail/ghunt-companion/dpdcofblfbmmnikcbmmiakkclocadjab)**
+## 🚀 Run GHunt
 
-After installing the extension, follow the prompts to complete the authentication process.
+Perform lookups using GHunt.
 
-#### **Common Authentication Issues:**
+### 🔍 Using Email Lookup
+Retrieve details of a Google account using an email address.
 
-**Error: `No stored session found.`**
+```sh
+python3 main.py email target@example.com
+```
+Replace `target@example.com` with the actual email you are investigating.
 
-**Solution:** Ensure you've completed the login process using the GHunt Companion extension. If the issue persists, rerun `ghunt login` and follow the authentication steps carefully.
+### 🔍 Using Gaia ID Lookup
+Retrieve details of a Google account using a Gaia ID.
 
-### **2. Modules**
+```sh
+python3 main.py gaia 1234567890
+```
+Replace `1234567890` with the actual Gaia ID.
+
+## 🛠 Available Modules
 
 After successful authentication, you can utilize various modules:
 
-```bash
+```sh
 ghunt [-h] {login,email,gaia,drive,geolocate,spiderdal} ...
 ```
 
-#### **Available Modules:**
+### **Module Descriptions:**
 - `login` → Authenticate GHunt to Google.
 - `email` → Retrieve information about an email address.
 - `gaia` → Fetch details associated with a Gaia ID.
@@ -91,39 +118,27 @@ ghunt [-h] {login,email,gaia,drive,geolocate,spiderdal} ...
 - `geolocate` → Determine the geographical location of a BSSID.
 - `spiderdal` → Discover assets using Digital Assets Links.
 
-#### **Example Usage:**
-
+### **Example Usage:**
 To gather information about a specific email address:
 
-```bash
+```sh
 ghunt email example@gmail.com
 ```
 
-#### **Exporting Data in JSON Format:**
-
+### **Exporting Data in JSON Format:**
 For structured data output, use the `--json` flag:
 
-```bash
+```sh
 ghunt email example@gmail.com --json output.json
 ```
 
-#### **Common Module Issues:**
+## 📝 Notes
 
-**Error: `ModuleNotFoundError: No module named 'packaging'`**
+✅ Ensure you are running commands inside the virtual environment (`venv`).
+✅ Replace `target@example.com` with the actual email you are investigating.
+✅ Replace `1234567890` with the actual Gaia ID.
 
-**Solution:** Install missing dependencies by running:
-
-```bash
-pip3 install -U ghunt
-```
-
-**Error: `ModuleNotFoundError: No module named 'rich_argparse'`**
-
-**Solution:** Update GHunt and its dependencies:
-
-```bash
-pip3 install -U ghunt
-```
+⚡ Happy Hunting! 🕵️‍♂️
 
 ## 🧑‍💻 Developers
 
@@ -134,7 +149,7 @@ For those interested in integrating GHunt into their projects:
 
 To use GHunt as a library, ensure it's installed in your environment:
 
-```bash
+```sh
 pip3 install ghunt
 ```
 
@@ -144,7 +159,7 @@ You can then import and utilize GHunt in your Python scripts:
 import ghunt
 ```
 
-## 📮 Details
+## 📬 Details
 
 ### **Obvious Disclaimer**
 
@@ -162,3 +177,4 @@ GHunt is licensed under the **AGPL License**. Ensure you comply with its terms. 
 ## ⭐ Sources
 
 [GHunt GitHub Repository](https://github.com/mxrch/GHunt)
+
