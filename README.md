@@ -1,123 +1,164 @@
-![](assets/long_banner.png)
+# GHunt
 
-<br>
+## 🐍 Python Compatibility
 
-#### 🌐 GHunt Online version : https://osint.industries
-#### 🐍 Now Python 3.13 compatible !
+GHunt is now compatible with **Python 3.13** and above.
 
-<br>
+## 😊 Description
 
-![Python minimum version](https://img.shields.io/badge/Python-3.10%2B-brightgreen)
+GHunt is an offensive Google framework designed for efficient evolution. While primarily focused on OSINT (Open Source Intelligence), it offers versatile functionalities related to Google services.
 
-# 😊 Description
+### Features:
+- Command-Line Interface (CLI) usage with multiple modules
+- Python library integration
+- Fully asynchronous operations
+- JSON data export
+- Browser extension to facilitate login
 
-GHunt (v2) is an offensive Google framework, designed to evolve efficiently.\
-It's currently focused on OSINT, but any use related with Google is possible.
+## ✔️ Requirements
 
-Features :
-- CLI usage and modules
-- Python library usage
-- Fully async
-- JSON export
-- Browser extension to ease login
+- Python version **3.10 or higher**
 
-# ✔️ Requirements
-- Python >= 3.10
+## ⚙️ Installation
 
-# ⚙️ Installation
+### **Using pipx (Recommended)**
 
 ```bash
-$ pip3 install pipx
-$ pipx ensurepath
-$ pipx install ghunt
+pip3 install pipx
+pipx ensurepath
+pipx install ghunt
 ```
-It will automatically use venvs to avoid dependency conflicts with other projects.
 
-# 💃 Usage
+This approach utilizes virtual environments to prevent dependency conflicts with other projects.
 
-## Login
+### **Alternative Installation Using pip**
 
-First, launch the listener by doing `ghunt login` and choose between 1 of the 2 first methods :
+If you prefer to use pip directly or plan to integrate GHunt as a library in your projects:
+
 ```bash
-$ ghunt login
+pip3 install ghunt
+```
 
-[1] (Companion) Put GHunt on listening mode (currently not compatible with docker)
+This method installs GHunt system-wide or within your active virtual environment.
+
+## 💃 Usage
+
+### **1. Authentication**
+
+Before using GHunt's modules, authenticate your session:
+
+#### **Start the Login Listener:**
+
+```bash
+ghunt login
+```
+
+You'll be presented with the following options:
+
+```
+[1] (Companion) Put GHunt on listening mode
 [2] (Companion) Paste base64-encoded cookies
 [3] Enter manually all cookies
 
 Choice =>
 ```
 
-Then, use GHunt Companion to complete the login.
+#### **Use GHunt Companion Extension:**
+- **[Firefox Users](https://addons.mozilla.org/en-US/firefox/addon/ghunt-companion/)**
+- **[Chrome Users](https://chrome.google.com/webstore/detail/ghunt-companion/dpdcofblfbmmnikcbmmiakkclocadjab)**
 
-The extension is available on the following stores :\
-\
-[![Firefox](https://files.catbox.moe/5g2ld5.png)](https://addons.mozilla.org/en-US/firefox/addon/ghunt-companion/)&nbsp;&nbsp;&nbsp;[![Chrome](https://storage.googleapis.com/web-dev-uploads/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/UV4C4ybeBTsZt43U4xis.png)](https://chrome.google.com/webstore/detail/ghunt-companion/dpdcofblfbmmnikcbmmiakkclocadjab)
+After installing the extension, follow the prompts to complete the authentication process.
 
-## Modules
+#### **Common Authentication Issues:**
 
-Then, profit :
-```bash
-Usage: ghunt [-h] {login,email,gaia,drive,geolocate} ...
+**Error: `No stored session found.`**
 
-Positional Arguments:
-  {login,email,gaia,drive,geolocate}
-    login               Authenticate GHunt to Google.
-    email               Get information on an email address.
-    gaia                Get information on a Gaia ID.
-    drive               Get information on a Drive file or folder.
-    geolocate           Geolocate a BSSID.
-    spiderdal           Find assets using Digital Assets Links.
+**Solution:** Ensure you've completed the login process using the GHunt Companion extension. If the issue persists, rerun `ghunt login` and follow the authentication steps carefully.
 
-Options:
-  -h, --help            show this help message and exit
-```
+### **2. Modules**
 
-📄 You can also use --json with email, gaia, drive and geolocate modules to export in JSON ! Example :
+After successful authentication, you can utilize various modules:
 
 ```bash
-$ ghunt email <email_address> --json user_data.json
+ghunt [-h] {login,email,gaia,drive,geolocate,spiderdal} ...
 ```
 
-**Have fun 🥰💞**
+#### **Available Modules:**
+- `login` → Authenticate GHunt to Google.
+- `email` → Retrieve information about an email address.
+- `gaia` → Fetch details associated with a Gaia ID.
+- `drive` → Obtain information on a Google Drive file or folder.
+- `geolocate` → Determine the geographical location of a BSSID.
+- `spiderdal` → Discover assets using Digital Assets Links.
 
-# 🧑‍💻 Developers
+#### **Example Usage:**
 
-📕 I started writing some docs [here](https://github.com/mxrch/GHunt/wiki) and examples [here](https://github.com/mxrch/GHunt/tree/master/examples), feel free to contribute !
+To gather information about a specific email address:
 
-To use GHunt as a lib, you can't use pipx because it uses a venv.\
-So you should install GHunt with pip :
 ```bash
-$ pip3 install ghunt
+ghunt email example@gmail.com
 ```
 
-And now, you should be able to `import ghunt` in your projects !\
-You can right now play with the [examples](https://github.com/mxrch/GHunt/tree/master/examples).
+#### **Exporting Data in JSON Format:**
 
-# 📮 Details
+For structured data output, use the `--json` flag:
 
-## Obvious disclaimer
+```bash
+ghunt email example@gmail.com --json output.json
+```
 
-This tool is for educational purposes only, I am not responsible for its use.
+#### **Common Module Issues:**
 
-## Less obvious disclaimer
+**Error: `ModuleNotFoundError: No module named 'packaging'`**
 
-This project is under [AGPL Licence](https://choosealicense.com/licenses/agpl-3.0/), and you have to respect it.\
-**Use it only in personal, criminal investigations, pentesting, or open-source projects.**
+**Solution:** Install missing dependencies by running:
 
-## Thanks
+```bash
+pip3 install -U ghunt
+```
 
-- [novitae](https://github.com/novitae) for being my Python colleague
-- All the people on [Malfrats Industries](https://discord.gg/sg2YcrC6x9) and elsewhere for the beta test !
-- The HideAndSec team 💗 (blog : https://hideandsec.sh)
-- [Med Amine Jouini](https://dribbble.com/jouiniamine) for his beautiful rework of the Google logo, which I was inspired by *a lot*.
+**Error: `ModuleNotFoundError: No module named 'rich_argparse'`**
 
-## Sponsors
+**Solution:** Update GHunt and its dependencies:
 
-Thanks to these awesome people for supporting me !
+```bash
+pip3 install -U ghunt
+```
 
-<!-- sponsors --><a href="https://github.com/BlWasp"><img src="https://github.com/BlWasp.png" width="50px" alt="BlWasp" /></a>&nbsp;&nbsp;<a href="https://github.com/gingeleski"><img src="https://github.com/gingeleski.png" width="50px" alt="gingeleski" /></a>&nbsp;&nbsp;<!-- sponsors -->
+## 🧑‍💻 Developers
 
-\
-You like my work ?\
-[Sponsor me](https://github.com/sponsors/mxrch) on GitHub ! 🤗
+For those interested in integrating GHunt into their projects:
+
+- **[Documentation](https://github.com/mxrch/GHunt/wiki)**
+- **[Examples](https://github.com/mxrch/GHunt/tree/master/examples)**
+
+To use GHunt as a library, ensure it's installed in your environment:
+
+```bash
+pip3 install ghunt
+```
+
+You can then import and utilize GHunt in your Python scripts:
+
+```python
+import ghunt
+```
+
+## 📮 Details
+
+### **Obvious Disclaimer**
+
+This tool is intended for **educational purposes only**. The author is not responsible for any misuse.
+
+### **Less Obvious Disclaimer**
+
+GHunt is licensed under the **AGPL License**. Ensure you comply with its terms. Use this tool only for **personal projects, criminal investigations, penetration testing, or open-source contributions**.
+
+### **Acknowledgments**
+
+- Special thanks to **novitae** for collaboration.
+- Appreciation to the **Malfrats Industries** community.
+
+## ⭐ Sources
+
+[GHunt GitHub Repository](https://github.com/mxrch/GHunt)
